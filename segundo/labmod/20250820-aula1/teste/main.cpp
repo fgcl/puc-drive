@@ -43,8 +43,8 @@ static void display(void)
     const double t = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
     const double a = t*90.0;
 
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glColor3d(1,0,0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //limpeza de buffer
+    glColor3d(1,1,0); // cor de toda a cena
 
     glPushMatrix();
         glTranslated(-2.4,1.2,-6);
@@ -57,7 +57,7 @@ static void display(void)
         glTranslated(0,1.2,-6);
         glRotated(60,1,0,0);
         glRotated(a,0,0,1);
-        glutSolidCone(1,1,slices,stacks);
+        glutSolidCube(2.0); // desenha um cubo 3d solido
     glPopMatrix();
 
     glPushMatrix();
@@ -138,8 +138,8 @@ const GLfloat high_shininess[] = { 100.0f };
 int main(int argc, char *argv[])
 {
     glutInit(&argc, argv);
-    glutInitWindowSize(640,480);
-    glutInitWindowPosition(10,10);
+    glutInitWindowSize(1080,720);
+    glutInitWindowPosition(0,0);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 
     glutCreateWindow("GLUT Shapes");
