@@ -14,7 +14,7 @@ int contador_de_caracteres(char letra){
     int i = 0;
     while(1){
         caractere = fgetc(fp);
-        if(feof(f))
+        if(feof(fp))
             break;
         if(caractere==letra){
             numero++;
@@ -49,5 +49,21 @@ int limite_de_caracteres(int numero){
 }
 
 void substitui_espacos(){
+    FILE *entrada, *saida;
+    char ch;
+    char filename[20] = "teste.txt";
+    entrada = fopen(filename, "r");
+    if (entrada == NULL) {
+        printf("Erro ao abrir o arquivo!\n");
+        return -404;
+    }
+    saida = fopen(filename, "w");
+    if (saida == NULL) {
+        printf("Erro ao abrir o arquivo!\n");
+        return -404;
+    }
+    fclose(entrada);
+    fclose(saida);
+    return 0;
 
 }
