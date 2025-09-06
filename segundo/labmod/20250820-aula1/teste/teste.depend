@@ -4,10 +4,10 @@
 	<stdlib.h>
 	<stdio.h>
 
-1659032722 c:\program files\codeblocks\mingw\include\gl\glut.h
+1426360528 c:\program files\codeblocks\mingw\include\gl\glut.h
 	"freeglut_std.h"
 
-1659032722 c:\program files\codeblocks\mingw\include\gl\freeglut_std.h
+1426360528 c:\program files\codeblocks\mingw\include\gl\freeglut_std.h
 	<windows.h>
 	<EGL/egl.h>
 	<GLES/gl.h>
@@ -365,4 +365,10 @@
 1618166295 c:\program files\codeblocks\mingw\include\gl\glu.h
 	<stddef.h>
 	<GL/gl.h>
+
+1757164735 source:c:\users\felipe\documents\faculdadecc\puc-drive\segundo\labmod\20250820-aula1\teste\main.cpp
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<stdlib.h>
+	<stdio.h>
 
