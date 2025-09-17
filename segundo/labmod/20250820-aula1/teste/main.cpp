@@ -6,13 +6,53 @@
 //#ifdef __APPLE__
 //#include <GLUT/glut.h>
 //#else
-#include <GL/glut.h>
+#include <GL/glut.h> // necessario para funcionar no pc da puc
 //#endif
 #include <stdlib.h>
 #include <stdio.h>
 
-GLfloat escala = 1;
-GLfloat posx = 0, posy = 0, angle = 0;
+GLfloat escala;
+GLfloat posx, posy, angle;
+
+typedef struct{
+    float x, y;
+} Ponto;
+
+typedef struct{
+    Ponto p1, p2, p3;
+} Triangulo;
+
+Triangulo t1;
+
+void inicializar(void){
+    t1.p1.x = 0;
+    t1.p1.y = 2;
+    t1.p2.x = 2;
+    t1.p2.y = 0;
+    t1.p3.x = -2;
+    t1.p3.y = 0;
+
+    escala = 1;
+    posx = 0;
+    posy = 0;
+    angle = 0;
+}
+
+Ponto escalamento(Ponto p){ //proprio substitui o glscale
+    Ponto aux;
+    printf("Escala: %f\n", escala);
+    printf("Valor: %f\n", p.x);
+    aux.x = escala * p.x;
+    aux.y = escala * p.y;
+    return aux;
+}
+
+Ponto mover(Ponto p){
+    Ponto mov;
+    mov.x = posx + p.x;
+    mov.y = posy + p.y;
+    return mov;
+}
 
 void desenha(void)
 {
@@ -26,14 +66,15 @@ void desenha(void)
     glLoadIdentity();
     gluOrtho2D(-10, 10, -10, 10); // escala inicial da matrix
 
-    glTranslatef(posx, posy, 0);
-    glScalef(escala, escala, 0);
+    //glTranslatef(posx, posy, 0);
+    //glScalef(escala, escala, 0);
     glRotatef(angle, 0, 0, 1);
 
     glMatrixMode(GL_MODELVIEW);// matrix dos objetos
     glLoadIdentity();
 
     // formas
+    glLineWidth(3.0); // tamanho da linha
 
     // F
     glBegin(GL_LINE_LOOP);
@@ -74,6 +115,20 @@ void desenha(void)
     glVertex2f(9, -7); // e
     glVertex2f(9, -9); //f
     glEnd();
+
+    t1.p1 = escalamento(t1.p1);
+    t1.p2 = escalamento(t1.p2);
+    t1.p3 = escalamento(t1.p3);
+    t1.p1 = mover(t1.p1);
+    t1.p2 = mover(t1.p2);
+    t1.p3 = mover(t1.p3);
+
+    glBegin(GL_TRIANGLES);
+    glVertex2f(t1.p1.x, t1.p1.y);
+    glVertex2f(t1.p2.x, t1.p2.y);
+    glVertex2f(t1.p3.x, t1.p3.y);
+    glEnd();
+
     glFlush();
 }
 
@@ -116,7 +171,7 @@ int main(int argc, char *argv[])
 {
     printf("Localizado:\n");
     printf("%s\n", argv[0]);
-
+    inicializar();
     glutInit(&argc, argv);
     glutInitWindowSize(720,720); // define o tamanho da janela
     glutInitWindowPosition(0,0); // posicao da janela
